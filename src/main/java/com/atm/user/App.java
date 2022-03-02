@@ -12,7 +12,7 @@ public class App
     {
     	  
     	        System.out.println("***********************************************************************************************************");
-    	    	System.out.println("                                             Welcome to ABC Bank                                           ");
+    	    	System.out.println("                                             Welcome to SBI Bank                                           ");
     	    	System.out.println("***********************************************************************************************************");
     	    	System.out.println("                                         PLEASE INSERT YOUR DEBIT CARD                                     ");
     	    	
