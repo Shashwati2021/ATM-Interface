@@ -17,7 +17,7 @@ public class ATMUserDBOperation {
 	 //Account Creation Method
 	 synchronized public boolean openAccount( AtmUser e) throws SQLException
 		{
-			PreparedStatement stmt=conn.prepareStatement("insert into SBIAtmUser values(?,?,?,?,?)");
+			PreparedStatement stmt=conn.prepareStatement("insert into User_details values(?,?,?,?,?)");
 			stmt.setLong(1, e.getAccno());
 			stmt.setLong(2,e.getUserPin());
 			stmt.setDouble(3,e.getAccBalance());
@@ -40,7 +40,7 @@ public class ATMUserDBOperation {
 	 	public boolean login(long UserPin) throws SQLException
 		{
 				
-			PreparedStatement stmt=conn.prepareStatement("select * from SBIAtmUser where UserPin=? ");
+			PreparedStatement stmt=conn.prepareStatement("select * from User_details where UserPin=? ");
 			stmt.setLong(1, UserPin);
 			
 			
@@ -60,7 +60,7 @@ public class ATMUserDBOperation {
 	 	{
 	 		try
 	 		{
-	 		PreparedStatement stmt=conn.prepareStatement("select * from SBIAtmUser where UserPin=? ");
+	 		PreparedStatement stmt=conn.prepareStatement("select * from User_details where UserPin=? ");
 			stmt.setLong(1, UserPin);	
 			ResultSet result=stmt.executeQuery();
 			double availableBalance=0.0;
@@ -71,7 +71,7 @@ public class ATMUserDBOperation {
 			  
 			  availableBalance=availableBalance + depositAmount;
 			  
-			  PreparedStatement stmt1=conn.prepareStatement("update SBIAtmUser set accBalance=? where UserPin=?");
+			  PreparedStatement stmt1=conn.prepareStatement("update User_details set accBalance=? where UserPin=?");
 			  stmt1.setDouble(1, availableBalance);
 			  stmt1.setLong(2,UserPin);
 			  int affectedRows=stmt1.executeUpdate();
@@ -97,7 +97,7 @@ public class ATMUserDBOperation {
 	 	{
 	 		try
 	 		{
-	 		PreparedStatement stmt=conn.prepareStatement("select * from SBIAtmUser where UserPin=? ");
+	 		PreparedStatement stmt=conn.prepareStatement("select * from User_details where UserPin=? ");
 			stmt.setLong(1, UserPin);	
 			ResultSet result=stmt.executeQuery();
 			double availableBalance=0.0;
@@ -108,7 +108,7 @@ public class ATMUserDBOperation {
 			  if(withdrawalAmount<=availableBalance)
 			  {
 			  availableBalance=availableBalance - withdrawalAmount;
-			  PreparedStatement stmt1=conn.prepareStatement("update SBIAtmUser set accBalance=? where UserPin=?");
+			  PreparedStatement stmt1=conn.prepareStatement("update User_details set accBalance=? where UserPin=?");
 			  stmt1.setDouble(1, availableBalance);
 			  stmt1.setLong(2,UserPin);
 			  int affectedRows=stmt1.executeUpdate();
@@ -140,7 +140,7 @@ public class ATMUserDBOperation {
 	 		ResultSet rs=null;
 	 		try
 	 		{
-	 		PreparedStatement pr=conn.prepareStatement("select * from SBIAtmUser where UserPin=?");
+	 		PreparedStatement pr=conn.prepareStatement("select * from User_details where UserPin=?");
 	 		pr.setLong(1, accno);
 	 		rs=pr.executeQuery();
 	 		
@@ -155,7 +155,7 @@ public class ATMUserDBOperation {
 			
 		public boolean changePassword(long accno,String newPassword) throws SQLException
 		{
-			PreparedStatement stmt=conn.prepareStatement("update SBIAtmUser set UserPin=? where UserPin=? ");
+			PreparedStatement stmt=conn.prepareStatement("update User_details set UserPin=? where UserPin=? ");
 			stmt.setString(1,newPassword);
 			stmt.setLong(2, accno);
 			int affectedRows=stmt.executeUpdate();
